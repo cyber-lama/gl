@@ -15,7 +15,7 @@ gl = {
 	initialize: function () {
 		if (!jQuery().colorbox) {
 			document.writeln('<style data-compiled-css>@import url(' + glConfig.assetsUrl + 'vendor/colorbox/example1/colorbox.css); </style>');
-			document.writeln('<script src="' + glConfig.assetsUrl + 'vendor/colorbox/jquery.colorbox-min.js"><\/script>');
+			document.writeln('<script src="' + glConfig.assetsUrl + 'vendor/colorbox/jquery.colorbox.js"><\/script>');
 			document.writeln('<script src="' + glConfig.assetsUrl + 'vendor/colorbox/i18n/jquery.colorbox-ru.js"><\/script>');
 		}
 		if (!jQuery().select2) {
@@ -48,6 +48,7 @@ gl.location = {
 		location: '.gl-list-location',
 		select2Container: '.gl-select2-container',
 
+		btnCloseInvert: '#cboxClose',
 		btnYes: '.btn-yes',
 		btnChange: '.btn-change',
 	},
@@ -60,6 +61,13 @@ gl.location = {
 		$(document).on('click touchend', gl.location.selectors.selectCurrent, function (e) {
 			gl.location.modal();
 			e.preventDefault();
+			return false;
+		});
+
+		$(document).on('click touchend', gl.location.selectors.btnCloseInvert, function (e) {
+			if(glConfig.modalShow === true){
+				gl.location.select({action:'select',id:1,class:'glCity'})
+			}
 			return false;
 		});
 
